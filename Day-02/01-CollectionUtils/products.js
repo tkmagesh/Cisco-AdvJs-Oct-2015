@@ -153,4 +153,93 @@ print("All", function(){
         console.log(all(products, costlyProductCriteria));
     });
 });
+print("Min",  function(){
+    function min(list, valueSelector){
+        var result = valueSelector(list[0]);
+        for(var i=1; i<list.length; i++){
+            var value = valueSelector(list[i]);
+            if (value < result) result = value;
+        }
+        return result;
+    }
+    console.log("Min cost = ", min(products, function(product){ return product.cost; }));
+});
+print("Max",  function(){
+    function max(list, valueSelector){
+        var result = valueSelector(list[0]);
+        for(var i=1; i<list.length; i++){
+            var value = valueSelector(list[i]);
+            if (value > result) result = value;
+        }
+        return result;
+    }
+    console.log("Max cost = ", max(products, function(product){ return product.cost; }));
+});
+print("Sum",  function(){
+    function sum(list, valueSelector){
+        var result = valueSelector(list[0]);
+        for(var i=1; i<list.length; i++){
+            var value = valueSelector(list[i]);
+            result += value;
+        }
+        return result;
+    }
+    console.log("Sum of units = ", sum(products, function(product){ return product.units; }));
+});
 
+print("Reduce", function(){
+    function reduce(list, fn, seed){
+        var result = seed;
+        for(var i=0; i<list.length; i++)
+            result = fn(result, list[i]);
+        return result;
+    }
+    print("Min cost (using reduce)", function(){
+        var minCost = reduce(products, function(result, product){
+            return result < product.cost ? result : product.cost;
+        }, Number.MAX_VALUE);
+        console.log("min cost = ", minCost);
+    });
+    print("Max cost (using reduce)", function(){
+        var maxCost = reduce(products, function(result, product){
+            return result > product.cost ? result : product.cost;
+        }, Number.MIN_VALUE);
+        console.log("max cost = ", maxCost);
+    });
+    print("Sum of units (using reduce)", function(){
+        var sumOfUnits = reduce(products, function(result, product){
+            return result + product.units;
+        }, 0);
+        console.log("sum of units = ", sumOfUnits);
+    });
+});
+
+print("GroupBy", function(){
+    function groupBy(list, keySelector){
+        var result = {};
+        for(var i=0; i<list.length; i++){
+            var key = keySelector(list[i]);
+            result[key] = result[key] || [];
+            result[key].push(list[i]);
+        }
+        return result;
+    }
+    print("Product By category", function(){
+        var productsByCategory = groupBy(products, function(product){ return product.category; });
+        for(var key in productsByCategory){
+            print("Key - " + key, function(){
+                console.table(productsByCategory[key]);
+            });
+        }
+    });
+    print("Products By cost", function(){
+        var productsByCost = groupBy(products, function(product){
+            return product.cost > 50 ? "costly" : "affordable";
+        });
+        for(var key in productsByCost){
+            print("Key - " + key, function(){
+                console.table(productsByCost[key]);
+            });
+        }
+    })
+})
