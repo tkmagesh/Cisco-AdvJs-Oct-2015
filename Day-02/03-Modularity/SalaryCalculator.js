@@ -1,4 +1,5 @@
-function SalaryCalculator(){
+define([], function(){
+    function SalaryCalculator(){
         this.basic = 0;
         this.hra = 0;
         this.da = 0;
@@ -9,3 +10,5 @@ function SalaryCalculator(){
         var gross = this.basic + this.hra + this.da;
         this.salary = gross * ((100-this.tax)/100);
     }
+    return SalaryCalculator;
+});

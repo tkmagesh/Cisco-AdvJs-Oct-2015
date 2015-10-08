@@ -1,3 +1,5 @@
-Object.prototype.toInt = function(){
+define([], function(){
+    Object.prototype.toInt = function(){
         return parseInt(this,10);
     };
+});

@@ -1,4 +1,5 @@
-function SalaryCalculatorView(calculator){
+define(['jquery'], function($){
+    function SalaryCalculatorView(calculator){
         this.init = function(){
             $("#btnCalculate").click(function(){
                 calculator.basic = $("#txtBasic").val().toInt();
@@ -14,3 +15,5 @@ function SalaryCalculatorView(calculator){
             });
         }
     }
+    return SalaryCalculatorView;
+});
