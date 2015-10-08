@@ -28,6 +28,42 @@ print("Default List", function(){
 });
 
 print("Sorting", function(){
-
+    print("Products By Id", function(){
+        function sort(){
+            for(var i=0; i<products.length-1; i++)
+                for(var j=i+1; j<products.length; j++){
+                    var left = products[i],
+                        right = products[j];
+                    if (left.id > right.id){
+                        products[i] = products[j];
+                        products[j] = left;
+                    }
+                }
+        }
+        sort();
+        console.table(products);
+    });
+    print("Any collection by any attribute", function(){
+        //modify the below function
+        function sort(){
+            for(var i=0; i<products.length-1; i++)
+                for(var j=i+1; j<products.length; j++){
+                    var left = products[i],
+                        right = products[j];
+                    if (left.id > right.id){
+                        products[i] = products[j];
+                        products[j] = left;
+                    }
+                }
+        }
+        print("products by cost", function(){
+            //do the sorting
+            console.table(products);
+        })
+        print("products by units", function(){
+            //do the sorting
+            console.table(products);
+        })
+    });
 });
 
